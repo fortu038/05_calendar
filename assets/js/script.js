@@ -7,14 +7,14 @@ var end_of_work_day = 24;
 
 // An array of objects. Stores two pieces, the title of event being planned and its time
 var scheduled_items = [
-    {
-        event: "Painting",
-        time: 9
-    },
-    {
-        event: "Dancing",
-        time: 10
-    }
+    // {
+    //     event: "Painting",
+    //     time: 9
+    // },
+    // {
+    //     event: "Dancing",
+    //     time: 10
+    // }
 ];
 
 function init() {
@@ -73,7 +73,7 @@ for(var i = start_of_work_day; i < end_of_work_day; i++) {
 
     var text_section = $(`<form id="form_num_${i}"> <div class="form-group">
     <label for="input_num_${i}" id="text_area_num_${i}">  </label>
-    <textarea class="form-control" id="input_num_${i}" rows="3"></textarea>
+    <textarea class="form-control" id="input_num_${i}" rows="1"></textarea>
     </div> </form>`);
     // var text_section = $(`<form id="form_num_${i}">
     // <input id="input_num_${i}"></input>
@@ -88,18 +88,19 @@ for(var i = start_of_work_day; i < end_of_work_day; i++) {
         // alert(`clciked save on number ${i}`);
         console.log("hit");
         var index = check_if_scheduled(i);
+        console.log($(`#input_num_${i}`).val());
         if(index === false) {
             console.log("in false");
             scheduled_items.push(
                 {
-                    event: $(`input_num_${i}`).text(),
+                    event: $(`#input_num_${i}`).text(),
                     time: i
                 }
             )
             build_schedule_page();
         } else {
             console.log("in num");
-            scheduled_items[index].event = $(`input_num_${i}`).text();
+            scheduled_items[index].event = $(`#input_num_${i}`).text();
             build_schedule_page();
         }
         console.log(scheduled_items);
