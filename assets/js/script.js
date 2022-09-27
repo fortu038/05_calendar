@@ -3,17 +3,17 @@ $("#currentDay").text(today.format("dddd, MMMM Do"));
 
 // Start and end times, lik other times used in this project, are in 24-hour time
 var start_of_work_day = 9;
-var end_of_work_day = 17;
+var end_of_work_day = 24;
 
 // An array of objects. Stores two pieces, the title of event being planned and its time
 var scheduled_items = [
     // {
     //     event: "Painting",
-    //     time: 9
+    //     time: 20
     // },
     // {
     //     event: "Dancing",
-    //     time: 10
+    //     time: 21
     // }
 ];
 
@@ -61,7 +61,7 @@ function build_schedule_page() {
 
 
 var container = $(".container");
-for(var i = start_of_work_day; i < end_of_work_day; i++) {
+for(let i = start_of_work_day; i < end_of_work_day; i++) {
     // console.log(i);
     var li_tag = $("<li>");
 
@@ -86,9 +86,10 @@ for(var i = start_of_work_day; i < end_of_work_day; i++) {
     // var button = $(`<button type="submit" class="btn btn-primary mb-2" id="button_num_${i}">Save Changes</button>`);
     // li_tag.append(button);
 
-    $(`#button_num_${i}`).on("submit", function(event) {
-        event.preventDefault();
-        alert(`clciked save on number ${i}`);
+    $(`#button_num_${i}`).on("submit", function(click) {
+        click.preventDefault();
+        click.stopImmediatePropagation();
+        click.isDefaultPrevented();
         console.log("hit");
         var index = check_if_scheduled(i);
         // console.log($(`input[name="input_num_${i}"]`));
@@ -109,7 +110,7 @@ for(var i = start_of_work_day; i < end_of_work_day; i++) {
             build_schedule_page();
         }
         console.log(scheduled_items);
-    });
+    }, true);
 
 
     var now_hour = moment().format("HH");
